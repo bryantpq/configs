@@ -87,14 +87,17 @@ export EDITOR='vim'
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
 
 local user_name="%{$fg[green]%}$USER"
-local host_name="%{$fg[cyan]%}$HOST"
+local host_name="%{$fg[white]%}@$HOST"
 local path_string="%{$fg[yellow]%}%~"
 local prompt_string="$"
 
 # Make prompt_string red if the previous command failed.
-local return_status="%(?:%{$fg[white]%}$prompt_string:%{$fg[red]%}$prompt_string)"
+local return_status="%(?:%{$fg[cyan]%}$prompt_string:%{$fg[red]%}$prompt_string)"
 
 PROMPT='${user_name} ${path_string} ${return_status} %{$reset_color%}'
 RPROMPT='${host_name}'
