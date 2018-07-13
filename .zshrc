@@ -7,7 +7,8 @@
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# ZSH_THEME="terminalparty"
+ZSH_THEME="agnoster"
+DEFAULT_USER="bryantpq"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -91,13 +92,15 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-local user_name="%{$fg[green]%}$USER"
-local host_name="%{$fg[white]%}@$HOST"
-local path_string="%{$fg[yellow]%}%~"
-local prompt_string="$"
+# =============== CUSTOM PROMPT =================
+# local user_name="%{$fg[green]%}$USER"
+# local host_name="%{$fg[white]%}@$HOST"
+# local path_string="%{$fg[yellow]%}%~"
+# local prompt_string="$"
+# 
+# # Make prompt_string red if the previous command failed.
+# local return_status="%(?:%{$fg[cyan]%}$prompt_string:%{$fg[red]%}$prompt_string)"
+# 
+# PROMPT='${user_name} ${path_string} ${return_status} %{$reset_color%}'
 
-# Make prompt_string red if the previous command failed.
-local return_status="%(?:%{$fg[cyan]%}$prompt_string:%{$fg[red]%}$prompt_string)"
-
-PROMPT='${user_name} ${path_string} ${return_status} %{$reset_color%}'
-RPROMPT='${host_name}'
+eval $(thefuck --alias)
