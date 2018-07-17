@@ -8,6 +8,7 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree'         " file directory
 " Plug 'scrooloose/syntastic'        " linter
+Plug 'w0rp/ale'                    " linter
 Plug 'ervandew/supertab'           " tab completion
 Plug 'yggdroot/indentline'         " shows indentation for lines
 Plug 'bling/vim-bufferline'        " shows open buffers
@@ -17,14 +18,14 @@ call plug#end()
 map <C-n> :NERDTreeToggle<CR>
 
 " =========== Syntastic ============
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
 
 " =========== Indent line ==========
 " only works with indentation with spaces
@@ -40,11 +41,13 @@ let g:indentLine_char = '¦' " use any ASCII character
 set statusline=\ %F\ \%m
 set statusline+=%=\[\%c\,\%l\/\%L\]\  
 
+set updatetime=250
+
 let mapleader = "\\"
 set nohlsearch " turn off highlighted search until needed
 highlight LineNr ctermfg=yellow
 syntax enable
-set autowriteall " save any changes before hiding a buffer
+" set autowriteall " save any changes before hiding a buffer
 set autoindent
 set background=light
 set backspace=indent,eol,start " backspace deletes previous character
@@ -58,12 +61,24 @@ set tabstop=4 " size of tab
 set t_Co=256
 set title
 set ttyfast
+set cursorline
 
 hi Search guibg=LightBlue
 
 inoremap <leader>s <c-o>:w<cr>A
-inoremap ( ()<Esc>i
-inoremap { {<CR>}<Esc>k$a
+" inoremap { {<CR>}<Esc>k$a
+
+" Make Enter/Backspace go forward/backward one paragraph
+nnoremap <BS> {
+onoremap <BS> {
+vnoremap <BS> {
+nnoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
+onoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
+vnoremap <CR> }
+
+" Keeps text highlighted when fixing indentation
+vnoremap < <gv
+vnoremap > >gv
 
 nnoremap <Leader>1 :1b<CR>
 nnoremap <Leader>2 :2b<CR>
@@ -89,7 +104,7 @@ nnoremap <leader>S <C-W>J
 nnoremap <leader>A <C-W>H
 nnoremap <leader>D <C-W>L
 
-autocmd BufWinLeave *.* mkview
+autocmd BufWinLeave *.* mkview          " save the current view when exiting
 autocmd BufWinEnter *.* silent loadview 
 
 " Print a useful title for xterm on exit
