@@ -126,9 +126,7 @@ fi
 
 # custom stuff
 export EDITOR=/usr/bin/vim
-export TERM=xterm-256color
 export PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]\w \$\[\033[00m\] '
-alias amath_docker='docker run -it -e "TERM=xterm-256color" -v "/home/bryantpq/Classes/amath_583/work:/home/amath583/work" amath583/base'
-alias amath_plot='docker run -it -e "TERM=xterm-256color" -v "/home/bryantpq/Classes/amath_583/work:/home/amath583/work" amath583/ps3'
 PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
-alias klaatu='ssh bryantpq@klaatu.cs.washington.edu'
+export PATH=/usr/local/bin/jdk1.8.0_171/bin/:$PATH
+export JAVA_HOME=/usr/local/bin/jdk1.8.0_131

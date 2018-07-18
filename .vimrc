@@ -1,4 +1,3 @@
-" Auto install vim plug if not already installed
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -14,58 +13,70 @@ Plug 'yggdroot/indentline'         " shows indentation for lines
 Plug 'bling/vim-bufferline'        " shows open buffers
 call plug#end()
 
-" =========== NERDTree =============
-map <C-n> :NERDTreeToggle<CR>
+" 
+" ********************* PlugIn Settings ***********************
+"
+" NERDTree
+nnoremap <C-o> :NERDTreeToggle<CR>
 
-" =========== Syntastic ============
+" Syntastic
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
 "set statusline+=%*
-"
 "let g:syntastic_always_populate_loc_list = 1
 "let g:syntastic_auto_loc_list = 1
 "let g:syntastic_check_on_open = 1
 "let g:syntastic_check_on_wq = 0
 
-" =========== Indent line ==========
+" Indent line
 " only works with indentation with spaces
 nnoremap <leader>il :IndentLinesToggle<cr>
 let g:indentLine_enabled = 1
 let g:indentLine_color_term = 8
 let g:indentLine_char = '¦' " use any ASCII character
 
-" TODO
-" Find and replace strings
+"
+" ********************* End PlugIn Settings ********************
+"
 
-" My statusbar
-set statusline=\ %F\ \%m
-set statusline+=%=\[\%c\,\%l\/\%L\]\  
-
-set updatetime=250
-
-let mapleader = "\\"
-set nohlsearch " turn off highlighted search until needed
-highlight LineNr ctermfg=yellow
+" General
 syntax enable
-" set autowriteall " save any changes before hiding a buffer
 set autoindent
-set background=light
+set hidden " keeps buffer hidden rather than abandoned when switching buffers, keeps undo history
+set background=light " tell vim what the background color looks like
+set t_Co=256 " enable 256 colors in vim
 set backspace=indent,eol,start " backspace deletes previous character
 set encoding=utf-8
 set expandtab " tabs to spaces
-set incsearch
-set laststatus=2 " enable statusbar
-set number
 set shiftwidth=4 " affects >> in normal mode
 set tabstop=4 " size of tab
-set t_Co=256
+set number
 set title
 set ttyfast
 set cursorline
+set wildmenu " visual autocomplete for command menu
+set updatetime=250
+" set autowriteall " save any changes before hiding a buffer
+autocmd BufWinEnter *.* silent loadview 
+autocmd BufWinLeave *.* mkview
+highlight LineNr ctermfg=yellow
 
-hi Search guibg=LightBlue
 
-inoremap <leader>s <c-o>:w<cr>A
+" Statusbar
+set laststatus=2 " enable statusbar
+set statusline=\ %F\ \%m
+set statusline+=%=\[\%c\,\%l\/\%L\]\  
+
+
+" Search highlighting
+hi Search ctermbg=DarkYellow
+set nohlsearch " turn off highlighted search until needed
+set incsearch " async search
+
+
+" ***************** KeyBindings *******************
+let mapleader = "\\"
+
 " inoremap { {<CR>}<Esc>k$a
 
 " Make Enter/Backspace go forward/backward one paragraph
@@ -104,11 +115,30 @@ nnoremap <leader>S <C-W>J
 nnoremap <leader>A <C-W>H
 nnoremap <leader>D <C-W>L
 
-autocmd BufWinLeave *.* mkview          " save the current view when exiting
-autocmd BufWinEnter *.* silent loadview 
+" # A way to delete 'mkview', just type :delview
+function! MyDeleteView()
+	let path = fnamemodify(bufname('%'),':p')
+	" vim's odd =~ escaping for /
+	let path = substitute(path, '=', '==', 'g')
+	if empty($HOME)
+	else
+		let path = substitute(path, '^'.$HOME, '\~', '')
+	endif
+	let path = substitute(path, '/', '=+', 'g') . '='
+	" view directory
+	let path = &viewdir.'/'.path
+	call delete(path)
+	echo "Deleted: ".path
+    autocmd! BufWinLeave *.*
+endfunction
+command Delview call MyDeleteView()
+" Lower-case user commands: http://vim.wikia.com/wiki/Replace_a_builtin_command_using_cabbrev
+cabbrev delview <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Delview' : 'delview')<CR>
 
-" Print a useful title for xterm on exit
-" let &titleold=getcwd()
+
+" :%s/foo/bar/g     find all occurrences of foo in all lines and replace
+" :s/foo/bar/gi     find all occurences (case-insensitive) of foo in current line and replace
+" :%s/foo/bar/gc    same as fist but confirm before replace
 
 " BASIC KEYS IN NORMAL MODE
 " H go to top of screen
@@ -119,23 +149,13 @@ autocmd BufWinEnter *.* silent loadview
 " ma set mark named a
 " `a go to mark named a
 
-
 " BASIC COMMANDS NORMAL MODE
-" :ls
-"   list and enumerate opened buffers
-" :b2
-"   open buffer for file number 2 (as indexed by :ls)
 " :bd
 "   close current buffer, fails if unsaved
 " :buffers
 "   lists buffers and waits for a number to open that buffer
 " <c-6>
 "   swaps between current and previous buffer
-" :vsplit file or :split file
-"   opens specified file in a new window
-"   CTRL + w + [hjkl] navigates to a split buffer
-"   CTRL + w + [HJKL] moves the current buffer to a new position
-
 
 " VIMRC COMMANDS
 " noremap, nnoremap, vnoremap and inoremap
@@ -144,17 +164,6 @@ autocmd BufWinEnter *.* silent loadview
 "   changes str1 to str 2 in insert mode when any non-keyword character is entered after str1
 " set iskeyword?
 "   displays keyword chars, by default alphanumeric and underscore are keyword chars
-" autocmd event filter cmd
-"   when event happens, run cmd after filtering for filter
-"   :help autocmd-events to see list of events
-
-
-" NOTABLE KEYS
-" <leader> refers to pressing whatever the leader key is binded to, does not need to be held down to be used like CTRL key
-" <bs> backspace
-" <space> SPACEBAR " <c-d> CTRL + d
-" <cr> carriage return i.e. ENTER
-
 
 " RANDOM (MIGHT BE USEFUL LATER ON) STUFF
 " in visual mode, iw selects the entire word under cursor

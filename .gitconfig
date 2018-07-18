@@ -1,0 +1,16 @@
+[user]
+    email = bryanquah@gmail.com
+    name = Bryan Quah
+
+
+[alias]
+    a = add
+    b = branch
+    c = commit
+    d = diff
+    g = grep
+    l = log
+    s = status
+    w = whatchanged
+
+    cm = commit --message
