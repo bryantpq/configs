@@ -91,6 +91,7 @@ export EDITOR='vim'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias windows='cd /mnt/c/Users/bryan.tun.pey.quah/'
 
 # =============== CUSTOM PROMPT =================
 # local user_name="%{$fg[green]%}$USER"
