@@ -1,4 +1,1 @@
-# configs
-You already know <br />
-
-Issues has a list of things I want to implement... someday
+Check issues for a list of things I want to implement... someday
