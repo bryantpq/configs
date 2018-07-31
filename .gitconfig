@@ -14,3 +14,4 @@
     w = whatchanged
 
     cm = commit --message
+    co = checkout
