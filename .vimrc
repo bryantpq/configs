@@ -60,6 +60,8 @@ set updatetime=250
 autocmd BufWinEnter *.* silent loadview 
 autocmd BufWinLeave *.* mkview
 highlight LineNr ctermfg=yellow
+" set color of current line number
+hi CursorLineNR ctermfg=gray
 
 
 " Statusbar
@@ -69,7 +71,7 @@ set statusline+=%=\[\%c\,\%l\/\%L\]\
 
 
 " Search highlighting
-hi Search ctermbg=DarkYellow
+hi Search ctermbg=Blue
 set nohlsearch " turn off highlighted search until needed
 set incsearch " async search
 
@@ -131,7 +133,7 @@ function! MyDeleteView()
 	echo "Deleted: ".path
     autocmd! BufWinLeave *.*
 endfunction
-command Delview call MyDeleteView()
+command! Delview call MyDeleteView()
 " Lower-case user commands: http://vim.wikia.com/wiki/Replace_a_builtin_command_using_cabbrev
 cabbrev delview <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Delview' : 'delview')<CR>
 

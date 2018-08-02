@@ -1,0 +1,3 @@
+# Run this command to set git to globally use this ignore file
+# git config --global core.excludesfile ~/.gitignore
+*.swp

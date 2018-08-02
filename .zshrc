@@ -93,6 +93,15 @@ alias la='ls -A'
 alias l='ls -CF'
 alias windows='cd /mnt/c/Users/bryan.tun.pey.quah/'
 
+# =============== VirtualEnvWrapper ================
+# pip3 install --user virtualenvwrapper
+export WORKON_HOME=$HOME/.virtualenvs
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+
+# Run below to initialize shell commands for venvwrapper
+source $HOME/.local/bin/virtualenvwrapper.sh
+
+
 # =============== CUSTOM PROMPT =================
 # local user_name="%{$fg[green]%}$USER"
 # local host_name="%{$fg[white]%}@$HOST"
@@ -103,5 +112,3 @@ alias windows='cd /mnt/c/Users/bryan.tun.pey.quah/'
 # local return_status="%(?:%{$fg[cyan]%}$prompt_string:%{$fg[red]%}$prompt_string)"
 # 
 # PROMPT='${user_name} ${path_string} ${return_status} %{$reset_color%}'
-
-eval $(thefuck --alias)

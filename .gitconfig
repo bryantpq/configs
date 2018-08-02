@@ -14,3 +14,6 @@
     w = whatchanged
 
     cm = commit --message
+
+[core]
+	excludesfile = /home/bryantpq/.gitignore
