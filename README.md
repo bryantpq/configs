@@ -1,2 +1,1 @@
-# configs
-You already know
+Check issues for a list of things I want to implement... someday
