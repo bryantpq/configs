@@ -71,7 +71,8 @@ set statusline+=%=\[\%c\,\%l\/\%L\]\
 
 
 " Search highlighting
-hi Search ctermbg=Blue
+hi Search ctermbg=yellow
+hi Search ctermfg=black
 set nohlsearch " turn off highlighted search until needed
 set incsearch " async search
 
