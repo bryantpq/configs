@@ -1,3 +1,5 @@
+equalsz = '========================================================='
+
 default:
 	@ echo "Error: Please specify if you would like to import or export the config files."
 
@@ -12,6 +14,7 @@ import:
 push:
 	@ git add --all
 	@ git commit -m "*automated push message*"
+	@ git push
 
 export:
 	cp .bashrc $(HOME)
@@ -22,4 +25,3 @@ export:
 	cp .vimrc $(HOME)
 
 sauce:
-	echo `date +'%Y-%m-%d'`
