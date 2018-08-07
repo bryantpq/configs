@@ -9,6 +9,10 @@ import:
 	cp $(HOME)/.zshrc .
 	cp $(HOME)/.vimrc .
 
+push:
+	@ git add --all
+	@ git commit -m "*automated push message*"
+
 export:
 	cp .bashrc $(HOME)
 	cp .gitconfig $(HOME)
@@ -16,3 +20,6 @@ export:
 	cp .tmux.conf $(HOME)
 	cp .zshrc $(HOME)
 	cp .vimrc $(HOME)
+
+sauce:
+	echo `date +'%Y-%m-%d'`
