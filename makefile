@@ -13,7 +13,7 @@ import:
 
 push:
 	@ git add --all
-	@ git commit -m "*automated push message*"
+	@ git commit -m "*automated commit message*"
 	@ git push
 
 export:
