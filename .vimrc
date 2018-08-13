@@ -7,10 +7,15 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree'         " file directory
 " Plug 'scrooloose/syntastic'        " linter
-Plug 'w0rp/ale'                    " linter
 Plug 'ervandew/supertab'           " tab completion
 Plug 'yggdroot/indentline'         " shows indentation for lines
 Plug 'bling/vim-bufferline'        " shows open buffers
+" Plug 'tpope/vim-surround'          " handle surrounding braces and stuff
+" Plug 'airblade/vim-gitgutter'      " shows git diff details
+" Plug 'majutsushi/tagbar'           " shows summary of file struct
+" Plug 'valloric/youcomplete'        " tab completion
+" Plug 'xuyuanp/nerdtree-git-plugin' " NERDTree git status
+" Plug 'w0rp/ale'                    " linter
 call plug#end()
 
 " 
