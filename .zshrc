@@ -90,6 +90,7 @@ export EDITOR='vim'
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ll='ls -alF'
 alias la='ls -A'
+alias ls='ls -F --color=tty'
 alias l='ls -CF'
 alias windows='cd /mnt/c/Users/bryan.tun.pey.quah/'
 
