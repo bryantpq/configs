@@ -6,12 +6,11 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree'         " file directory
-" Plug 'scrooloose/syntastic'        " linter
 Plug 'ervandew/supertab'           " tab completion
 Plug 'yggdroot/indentline'         " shows indentation for lines
 Plug 'bling/vim-bufferline'        " shows open buffers
-" Plug 'tpope/vim-surround'          " handle surrounding braces and stuff
-" Plug 'airblade/vim-gitgutter'      " shows git diff details
+Plug 'tpope/vim-surround'          " handle surrounding braces and stuff
+Plug 'airblade/vim-gitgutter'      " shows git diff details
 " Plug 'majutsushi/tagbar'           " shows summary of file struct
 " Plug 'valloric/youcomplete'        " tab completion
 " Plug 'xuyuanp/nerdtree-git-plugin' " NERDTree git status
@@ -40,11 +39,20 @@ let g:indentLine_enabled = 1
 let g:indentLine_color_term = 8
 let g:indentLine_char = '¦' " use any ASCII character
 
+" GitGutter
+let g:gitgutter_map_keys = 0 " turn off GitGutter key mappings
+
+" YouCompleteMe
+" let g:ycmm_python_binary_path = 'python3' " use first python3 executable found, matches venvs
+" go through docs for diagnostic tools setup
+
+
 "
 " ********************* End PlugIn Settings ********************
 "
 
 " General
+filetype on
 syntax enable
 set autoindent
 set hidden " keeps buffer hidden rather than abandoned when switching buffers, keeps undo history
