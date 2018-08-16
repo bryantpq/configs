@@ -6,13 +6,13 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree'         " file directory
-Plug 'ervandew/supertab'           " tab completion
 Plug 'yggdroot/indentline'         " shows indentation for lines
 Plug 'bling/vim-bufferline'        " shows open buffers
 Plug 'tpope/vim-surround'          " handle surrounding braces and stuff
-Plug 'airblade/vim-gitgutter'      " shows git diff details
+Plug 'ervandew/supertab'           " tab completion
+Plug 'valloric/youcompleteme'        " tab completion
+" Plug 'airblade/vim-gitgutter'      " shows git diff details
 " Plug 'majutsushi/tagbar'           " shows summary of file struct
-" Plug 'valloric/youcomplete'        " tab completion
 " Plug 'xuyuanp/nerdtree-git-plugin' " NERDTree git status
 " Plug 'w0rp/ale'                    " linter
 call plug#end()
@@ -43,7 +43,7 @@ let g:indentLine_char = '¦' " use any ASCII character
 let g:gitgutter_map_keys = 0 " turn off GitGutter key mappings
 
 " YouCompleteMe
-" let g:ycmm_python_binary_path = 'python3' " use first python3 executable found, matches venvs
+let g:ycmm_python_binary_path = 'python3' " use first python3 executable found, matches venvs
 " go through docs for diagnostic tools setup
 
 
