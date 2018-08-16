@@ -5,18 +5,24 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
+Plug 'vim-airline/vim-airline'     " statusbar
 Plug 'scrooloose/nerdtree'         " file directory
 Plug 'yggdroot/indentline'         " shows indentation for lines
-Plug 'bling/vim-bufferline'        " shows open buffers
 Plug 'tpope/vim-surround'          " handle surrounding braces and stuff
 Plug 'ervandew/supertab'           " tab completion
-Plug 'airblade/vim-gitgutter'      " shows git diff details in gutter
 Plug 'w0rp/ale'                    " linter
 " Plug 'majutsushi/tagbar'           " shows summary of file struct
 " Plug 'xuyuanp/nerdtree-git-plugin' " NERDTree git status
 call plug#end()
 
 " ********************* PlugIn Settings ***********************
+
+" VimAirline
+let g:airline_powerline_fonts = 1
+
+" Ale
+let g:airline#extensions#ale#enabled = 1
+
 " NERDTree
 nnoremap <C-o> :NERDTreeToggle<CR>
 
@@ -29,7 +35,6 @@ let g:indentLine_char = '¦' " supports any ASCII character
 
 " GitGutter
 let g:gitgutter_map_keys = 0 " turn off GitGutter key mappings
-
 
 " ********************* End PlugIn Settings ********************
 
@@ -61,8 +66,8 @@ hi CursorLineNR ctermfg=gray
 
 " Statusbar
 set laststatus=2 " enable statusbar
-set statusline=\ %F\ \%m
-set statusline+=%=\[\%c\,\%l\/\%L\]\  
+" set statusline=\ %F\ \%m
+" set statusline+=%=\[\%c\,\%l\/\%L\]\  
 
 
 " Search highlighting
