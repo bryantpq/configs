@@ -10,8 +10,8 @@ Plug 'yggdroot/indentline'         " shows indentation for lines
 Plug 'bling/vim-bufferline'        " shows open buffers
 Plug 'tpope/vim-surround'          " handle surrounding braces and stuff
 Plug 'ervandew/supertab'           " tab completion
-Plug 'airblade/vim-gitgutter'      " shows git diff details
-Plug 'scrooloose/syntastic'        " linter
+Plug 'airblade/vim-gitgutter'      " shows git diff details in gutter
+Plug 'w0rp/ale'                    " linter
 " Plug 'majutsushi/tagbar'           " shows summary of file struct
 " Plug 'xuyuanp/nerdtree-git-plugin' " NERDTree git status
 call plug#end()
@@ -20,21 +20,12 @@ call plug#end()
 " NERDTree
 nnoremap <C-o> :NERDTreeToggle<CR>
 
-" Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-" Indent line
+" IndentLine
 " only works with indentation with spaces
 nnoremap <leader>il :IndentLinesToggle<cr>
 let g:indentLine_enabled = 1
 let g:indentLine_color_term = 8
-let g:indentLine_char = '¦' " use any ASCII character
+let g:indentLine_char = '¦' " supports any ASCII character
 
 " GitGutter
 let g:gitgutter_map_keys = 0 " turn off GitGutter key mappings
@@ -58,7 +49,7 @@ set number
 set title
 set ttyfast
 set cursorline
-set wildmenu " visual autocomplete for command menu
+set wildmenu " visual autocomplete for command menu when hitting TAB
 set updatetime=250
 " set autowriteall " save any changes before hiding a buffer
 autocmd BufWinEnter *.* silent loadview 
@@ -78,7 +69,7 @@ set statusline+=%=\[\%c\,\%l\/\%L\]\
 hi Search ctermbg=yellow
 hi Search ctermfg=black
 set nohlsearch " turn off highlighted search until needed
-set incsearch " async search
+set incsearch " async search as you type
 
 
 " ***************** KeyBindings *******************
