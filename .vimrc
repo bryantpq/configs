@@ -11,25 +11,23 @@ Plug 'bling/vim-bufferline'        " shows open buffers
 Plug 'tpope/vim-surround'          " handle surrounding braces and stuff
 Plug 'ervandew/supertab'           " tab completion
 Plug 'airblade/vim-gitgutter'      " shows git diff details
+Plug 'scrooloose/syntastic'        " linter
 " Plug 'majutsushi/tagbar'           " shows summary of file struct
 " Plug 'xuyuanp/nerdtree-git-plugin' " NERDTree git status
-" Plug 'w0rp/ale'                    " linter
 call plug#end()
 
-" 
 " ********************* PlugIn Settings ***********************
-"
 " NERDTree
 nnoremap <C-o> :NERDTreeToggle<CR>
 
 " Syntastic
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " Indent line
 " only works with indentation with spaces
@@ -42,9 +40,7 @@ let g:indentLine_char = '¦' " use any ASCII character
 let g:gitgutter_map_keys = 0 " turn off GitGutter key mappings
 
 
-"
 " ********************* End PlugIn Settings ********************
-"
 
 " General
 filetype on
