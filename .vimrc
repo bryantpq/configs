@@ -10,8 +10,7 @@ Plug 'yggdroot/indentline'         " shows indentation for lines
 Plug 'bling/vim-bufferline'        " shows open buffers
 Plug 'tpope/vim-surround'          " handle surrounding braces and stuff
 Plug 'ervandew/supertab'           " tab completion
-Plug 'valloric/youcompleteme'        " tab completion
-" Plug 'airblade/vim-gitgutter'      " shows git diff details
+Plug 'airblade/vim-gitgutter'      " shows git diff details
 " Plug 'majutsushi/tagbar'           " shows summary of file struct
 " Plug 'xuyuanp/nerdtree-git-plugin' " NERDTree git status
 " Plug 'w0rp/ale'                    " linter
@@ -41,10 +40,6 @@ let g:indentLine_char = '¦' " use any ASCII character
 
 " GitGutter
 let g:gitgutter_map_keys = 0 " turn off GitGutter key mappings
-
-" YouCompleteMe
-let g:ycmm_python_binary_path = 'python3' " use first python3 executable found, matches venvs
-" go through docs for diagnostic tools setup
 
 
 "
