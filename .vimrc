@@ -5,11 +5,12 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'vim-airline/vim-airline'     " statusbar
+" Plug 'vim-airline/vim-airline'     " statusbar
 Plug 'scrooloose/nerdtree'         " file directory
 Plug 'yggdroot/indentline'         " shows indentation for lines
 Plug 'tpope/vim-surround'          " handle surrounding braces and stuff
-Plug 'ervandew/supertab'           " tab completion
+Plug 'bling/vim-bufferline'        " shows open buffers
+" Plug 'ervandew/supertab'           " tab completion
 Plug 'w0rp/ale'                    " linter
 " Plug 'majutsushi/tagbar'           " shows summary of file struct
 " Plug 'xuyuanp/nerdtree-git-plugin' " NERDTree git status
@@ -18,10 +19,26 @@ call plug#end()
 " ********************* PlugIn Settings ***********************
 
 " VimAirline
-let g:airline_powerline_fonts = 1
+" let g:airline_powerline_fonts = 1
 
 " Ale
-let g:airline#extensions#ale#enabled = 1
+" let g:airline#extensions#ale#enabled = 1
+let g:ale_completion_enabled = 1
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '--'
+function! LinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+
+    return l:counts.total == 0 ? 'OK' : printf(
+    \   '%dW %dE',
+    \   all_non_errors,
+    \   all_errors
+    \)
+endfunction
+
 
 " NERDTree
 nnoremap <C-o> :NERDTreeToggle<CR>
@@ -34,7 +51,7 @@ let g:indentLine_color_term = 8
 let g:indentLine_char = '¦' " supports any ASCII character
 
 " GitGutter
-let g:gitgutter_map_keys = 0 " turn off GitGutter key mappings
+" let g:gitgutter_map_keys = 0 " turn off GitGutter key mappings
 
 " ********************* End PlugIn Settings ********************
 
@@ -66,8 +83,10 @@ hi CursorLineNR ctermfg=gray
 
 " Statusbar
 set laststatus=2 " enable statusbar
-" set statusline=\ %F\ \%m
-" set statusline+=%=\[\%c\,\%l\/\%L\]\  
+set statusline=\ %t\ \%m
+set statusline+=%=[\%c\,\%l\/\%L\]\  
+
+set statusline+=%{LinterStatus()}
 
 
 " Search highlighting
