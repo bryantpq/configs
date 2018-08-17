@@ -18,3 +18,5 @@
 
 [core]
 	excludesfile = /home/bryantpq/.gitignore
+[push]
+	default = simple
