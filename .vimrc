@@ -21,11 +21,16 @@ call plug#end()
 " VimAirline
 " let g:airline_powerline_fonts = 1
 
-" Ale
+" Ale, :ALEInfo
 " let g:airline#extensions#ale#enabled = 1
+let g:ale_linters = {
+\   'python': ['flake8', 'pylint'],
+\}
 let g:ale_completion_enabled = 1
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
+let g:ale_python_flake8_options='--ignore=E501'
+
 function! LinterStatus() abort
     let l:counts = ale#statusline#Count(bufnr(''))
 
@@ -83,10 +88,13 @@ hi CursorLineNR ctermfg=gray
 
 " Statusbar
 set laststatus=2 " enable statusbar
-set statusline=\ %t\ \%m
-set statusline+=%=[\%c\,\%l\/\%L\]\  
+set statusline=
+set statusline+=\ %F\%m
 
-set statusline+=%{LinterStatus()}
+set statusline+=%=
+set statusline+=%y
+set statusline+=\ %c\,\%l\/\%L\  
+set statusline+=%{LinterStatus()}\  
 
 
 " Search highlighting
