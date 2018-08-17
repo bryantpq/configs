@@ -5,31 +5,33 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-" Plug 'vim-airline/vim-airline'     " statusbar
 Plug 'scrooloose/nerdtree'         " file directory
 Plug 'yggdroot/indentline'         " shows indentation for lines
 Plug 'tpope/vim-surround'          " handle surrounding braces and stuff
-Plug 'bling/vim-bufferline'        " shows open buffers
-" Plug 'ervandew/supertab'           " tab completion
 Plug 'w0rp/ale'                    " linter
-" Plug 'majutsushi/tagbar'           " shows summary of file struct
-" Plug 'xuyuanp/nerdtree-git-plugin' " NERDTree git status
+Plug 'ervandew/supertab'           " tab completion
+Plug 'ctrlpvim/ctrlp.vim'          " buffers and files
 call plug#end()
 
 " ********************* PlugIn Settings ***********************
 
-" VimAirline
-" let g:airline_powerline_fonts = 1
-
 " Ale, :ALEInfo
-" let g:airline#extensions#ale#enabled = 1
+" Only run linter when buffer is entered or saved
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 1
+let g:ale_echo_cursor = 1
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '--'
 let g:ale_linters = {
 \   'python': ['flake8', 'pylint'],
 \}
-let g:ale_completion_enabled = 1
-let g:ale_sign_error = '>>'
-let g:ale_sign_warning = '--'
-let g:ale_python_flake8_options='--ignore=E501'
+let g:ale_python_flake8_options='--ignore=E501,E261'
+let g:ale_echo_msg_format = '[%linter%%-code%] %severity%: %s'
+hi ALEWarning ctermfg=Black ctermbg=Yellow
+hi ALEError ctermfg=White ctermbg=Red
+hi ALEInfo ctermfg=White ctermbg=DarkBlue
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 function! LinterStatus() abort
     let l:counts = ale#statusline#Count(bufnr(''))
@@ -37,12 +39,24 @@ function! LinterStatus() abort
     let l:all_errors = l:counts.error + l:counts.style_error
     let l:all_non_errors = l:counts.total - l:all_errors
 
-    return l:counts.total == 0 ? 'OK' : printf(
+    return l:counts.total == 0 ? '' : printf(
     \   '%dW %dE',
     \   all_non_errors,
     \   all_errors
     \)
 endfunction
+
+" CtrlP
+" <F5> purge the cache, get new files, remove deleted files, apply ignore options.
+" <c-f> and <c-b> to cycle between modes.
+" <c-d> to switch to filename only search instead of full path.
+"" <c-j>, <c-k> or the arrow keys to navigate the result list.
+" <c-t> or <c-v>, <c-x> to open the selected entry in a new tab or in a new split.
+" <c-n>, <c-p> to select the next/previous string in the prompt's history.
+" <c-y> to create a new file and its parent directories.
+" <c-z> to mark/unmark multiple files and <c-o> to open them.
+let g:ctrlp_map = ',f'
+nnoremap <silent> ,b :CtrlPBuffer<CR>
 
 
 " NERDTree
@@ -54,9 +68,6 @@ nnoremap <leader>il :IndentLinesToggle<cr>
 let g:indentLine_enabled = 1
 let g:indentLine_color_term = 8
 let g:indentLine_char = '¦' " supports any ASCII character
-
-" GitGutter
-" let g:gitgutter_map_keys = 0 " turn off GitGutter key mappings
 
 " ********************* End PlugIn Settings ********************
 
@@ -89,12 +100,11 @@ hi CursorLineNR ctermfg=gray
 " Statusbar
 set laststatus=2 " enable statusbar
 set statusline=
-set statusline+=\ %F\%m
+set statusline+=\ %.40F\%m
 
 set statusline+=%=
-set statusline+=%y
-set statusline+=\ %c\,\%l\/\%L\  
-set statusline+=%{LinterStatus()}\  
+set statusline+=\ \[%c\,\%l\/\%L\]\  
+set statusline+=%{LinterStatus()}\ 
 
 
 " Search highlighting
