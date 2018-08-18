@@ -39,11 +39,13 @@ function! LinterStatus() abort
     let l:all_errors = l:counts.error + l:counts.style_error
     let l:all_non_errors = l:counts.total - l:all_errors
 
-    return l:counts.total == 0 ? '' : printf(
-    \   '%dW %dE',
-    \   all_non_errors,
-    \   all_errors
-    \)
+    if l:counts.total == 0
+        hi LinterStat ctermfg=black ctermbg=green cterm=none
+        return ' ( OK ) '
+    else
+        hi LinterStat ctermfg=black ctermbg=cyan cterm=none
+        return ' (W:'.all_non_errors.' E:'.all_errors.') '
+    endif
 endfunction
 
 " CtrlP
@@ -98,13 +100,17 @@ hi CursorLineNR ctermfg=gray
 
 
 " Statusbar
+" Make highlight group for status
+hi StatusLine ctermfg=15 guifg=#ffffff ctermbg=239 guibg=#4e4e4e cterm=none gui=none
+hi StatusLineNC ctermfg=249 guifg=#b2b2b2 ctermbg=232 guibg=#3a3a3a cterm=none gui=none
 set laststatus=2 " enable statusbar
 set statusline=
-set statusline+=\ %.40F\%m
+set statusline+=\ %.50F\%m
 
 set statusline+=%=
-set statusline+=\ \[%c\,\%l\/\%L\]\  
-set statusline+=%{LinterStatus()}\ 
+set statusline+=\[%c\,\%l\/\%L\]\ 
+set statusline+=%#LinterStat#
+set statusline+=%{LinterStatus()}
 
 
 " Search highlighting
@@ -130,17 +136,6 @@ vnoremap <CR> }
 " Keeps text highlighted when fixing indentation
 vnoremap < <gv
 vnoremap > >gv
-
-nnoremap <Leader>1 :1b<CR>
-nnoremap <Leader>2 :2b<CR>
-nnoremap <Leader>3 :3b<CR>
-nnoremap <Leader>4 :4b<CR>
-nnoremap <Leader>5 :5b<CR>
-nnoremap <Leader>6 :6b<CR>
-nnoremap <Leader>7 :7b<CR>
-nnoremap <Leader>8 :8b<CR>
-nnoremap <Leader>9 :9b<CR>
-nnoremap <Leader>0 :10b<CR>
 
 nnoremap U <C-R>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
