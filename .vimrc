@@ -32,6 +32,7 @@ hi ALEError ctermfg=White ctermbg=Red
 hi ALEInfo ctermfg=White ctermbg=DarkBlue
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
+nnoremap <leader>at :ALEToggle<CR>
 
 function! LinterStatus() abort
     let l:counts = ale#statusline#Count(bufnr(''))
@@ -43,7 +44,7 @@ function! LinterStatus() abort
         hi LinterStat ctermfg=black ctermbg=green cterm=none
         return ' ( OK ) '
     else
-        hi LinterStat ctermfg=black ctermbg=cyan cterm=none
+        hi LinterStat ctermfg=black ctermbg=magenta cterm=none
         return ' (W:'.all_non_errors.' E:'.all_errors.') '
     endif
 endfunction
@@ -101,8 +102,8 @@ hi CursorLineNR ctermfg=gray
 
 " Statusbar
 " Make highlight group for status
-hi StatusLine ctermfg=15 guifg=#ffffff ctermbg=239 guibg=#4e4e4e cterm=none gui=none
-hi StatusLineNC ctermfg=249 guifg=#b2b2b2 ctermbg=232 guibg=#3a3a3a cterm=none gui=none
+hi StatusLine ctermfg=15 guifg=#ffffff ctermbg=darkblue guibg=#4e4e4e cterm=none gui=none
+hi StatusLineNC ctermfg=249 guifg=#b2b2b2 ctermbg=233 guibg=#3a3a3a cterm=none gui=none
 set laststatus=2 " enable statusbar
 set statusline=
 set statusline+=\ %.50F\%m
