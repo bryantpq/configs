@@ -91,8 +91,7 @@ export EDITOR='vim'
 alias ll='ls -alF'
 alias la='ls -A'
 alias ls='ls -F --color=tty'
-alias l='ls -CF'
-alias windows='cd /mnt/c/Users/bryan.tun.pey.quah/'
+alias l='ls -C'
 
 # =============== VirtualEnvWrapper ================
 # pip3 install --user virtualenvwrapper
