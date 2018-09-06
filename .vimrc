@@ -25,7 +25,7 @@ let g:ale_sign_warning = '--'
 let g:ale_linters = {
 \   'python': ['flake8', 'pylint'],
 \}
-let g:ale_python_flake8_options='--ignore=E501,E261'
+let g:ale_python_flake8_options='--ignore=E501,E261,F841'
 let g:ale_echo_msg_format = '[%linter%%-code%] %severity%: %s'
 hi ALEWarning ctermfg=Black ctermbg=Yellow
 hi ALEError ctermfg=White ctermbg=Red
@@ -139,6 +139,8 @@ vnoremap < <gv
 vnoremap > >gv
 
 nnoremap U <C-R>
+nnoremap - $
+vnoremap - $
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap <leader>h :set hlsearch!<cr>
