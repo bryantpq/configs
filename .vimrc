@@ -147,6 +147,8 @@ vnoremap < <gv
 vnoremap > >gv
 
 nnoremap U <C-R>
+nnoremap - $
+vnoremap - $
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap <leader>h :set hlsearch!<cr>
