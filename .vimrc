@@ -25,14 +25,15 @@ let g:ale_sign_warning = '--'
 let g:ale_linters = {
 \   'python': ['flake8', 'pylint'],
 \}
-let g:ale_python_flake8_options='--ignore=E501,E261'
+let g:ale_python_flake8_options='--ignore=E501,E261,E221,E201,E202,W391,F841,E265,E266'
 let g:ale_echo_msg_format = '[%linter%%-code%] %severity%: %s'
 hi ALEWarning ctermfg=Black ctermbg=Yellow
 hi ALEError ctermfg=White ctermbg=Red
 hi ALEInfo ctermfg=White ctermbg=DarkBlue
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
-nnoremap <leader>at :ALEToggle<CR>
+" turn off linter
+nnoremap <leader>at :ALEToggle<CR> 
 
 function! LinterStatus() abort
     let l:counts = ale#statusline#Count(bufnr(''))
@@ -86,7 +87,6 @@ set encoding=utf-8
 set expandtab " tabs to spaces
 set shiftwidth=4 " affects >> in normal mode
 set tabstop=4 " size of tab
-set number
 set title
 set ttyfast
 set cursorline
@@ -99,6 +99,14 @@ highlight LineNr ctermfg=yellow
 " set color of current line number
 hi CursorLineNR ctermfg=gray
 
+" Set number and relativenumber for lines
+set number relativenumber
+" Disable relativenumber when inserting
+augroup numbertoggle
+    autocmd!
+    autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+    autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
 
 " Statusbar
 " Make highlight group for status

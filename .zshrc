@@ -90,8 +90,8 @@ export EDITOR='vim'
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ll='ls -alF'
 alias la='ls -A'
-alias ls='ls -F --color=tty'
-alias l='ls -C'
+alias ls='ls --color=tty'
+alias l='ls -FC'
 
 # =============== VirtualEnvWrapper ================
 # pip3 install --user virtualenvwrapper
