@@ -146,7 +146,6 @@ vnoremap <CR> }
 vnoremap < <gv
 vnoremap > >gv
 
-nnoremap U <C-R>
 nnoremap - $
 vnoremap - $
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
