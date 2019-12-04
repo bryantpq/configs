@@ -146,7 +146,6 @@ vnoremap <CR> }
 vnoremap < <gv
 vnoremap > >gv
 
-nnoremap U <C-R>
 inoremap jkj <ESC>
 nnoremap - $
 vnoremap - $
