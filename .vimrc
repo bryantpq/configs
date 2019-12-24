@@ -35,21 +35,6 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 " turn off linter
 nnoremap <leader>at :ALEToggle<CR> 
 
-function! LinterStatus() abort
-    let l:counts = ale#statusline#Count(bufnr(''))
-
-    let l:all_errors = l:counts.error + l:counts.style_error
-    let l:all_non_errors = l:counts.total - l:all_errors
-
-    if l:counts.total == 0
-        hi LinterStat ctermfg=black ctermbg=green cterm=none
-        return ' ( OK ) '
-    else
-        hi LinterStat ctermfg=black ctermbg=magenta cterm=none
-        return ' (W:'.all_non_errors.' E:'.all_errors.') '
-    endif
-endfunction
-
 " CtrlP
 " <F5> purge the cache, get new files, remove deleted files, apply ignore options.
 " <c-f> and <c-b> to cycle between modes.
@@ -118,8 +103,6 @@ set statusline+=\ %.50F\%m
 
 set statusline+=%=
 set statusline+=\[%c\,\%l\/\%L\]\ 
-set statusline+=%#LinterStat#
-set statusline+=%{LinterStatus()}
 
 
 " Search highlighting
