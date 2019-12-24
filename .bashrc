@@ -128,16 +128,3 @@ fi
 export EDITOR=/usr/bin/vim
 export PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w \$\[\033[00m\] '
 PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
-
-module load shared
-module load conda/4.5.9
-module load cmake/3.10.3
-module load bazel/0.19.2
-
-PYTHONPATH="/cm/shared/apps/conda2/anaconda/lib:${PYTHONPATH}" # 1.5.0 Tensorflow version to be run on nodes 0-3
-PYTHONPATH="${PYTHONPATH}:/cm/shared/apps/anaconda2/lib"   # new Tensorflow version 1.6 to be run on nodes 4-7
-export PATH="/cm/shared/apps/conda2/anaconda/bin:/home/bicgadmin/anaconda2/bin:/data/DevelopAndTest/bin:$PATH"
-alias headnode='ssh -X bryan@uig.pedom.peds.washington.edu'
-alias localhome='cd /nfsmnt/data/DevelopAndTest/bryan/segmentation_nn'
-alias headhome='cd /data/DevelopAndTest/bryan/segmentation_nn'
-alias nodehome='cd /share/data/DevelopAndTest/bryan/segmentation_nn'
